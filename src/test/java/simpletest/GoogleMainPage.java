@@ -2,7 +2,8 @@ package simpletest;
 
 import org.openqa.selenium.WebDriver;
 
-import static org.testng.Assert.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 public class GoogleMainPage {
 
@@ -13,13 +14,18 @@ public class GoogleMainPage {
         this.driver = driver;
     }
 
-    public GoogleMainPage openGoogleMain(){
+    public GoogleMainPage openGoogleMain() {
         driver.get("http://google.com");
         return this;
     }
 
-    public GoogleMainPage checkIfGoogle(){
-        assertTrue(driver.getTitle().equals("Google"));
+    public GoogleMainPage checkIfGoogle() {
+        assertThat(driver.getTitle(), equalTo("Google"));
+        return this;
+    }
+
+    public GoogleMainPage checkIfYahoo() {
+        assertThat(driver.getTitle(), equalTo("Yahoo"));
         return this;
     }
 
