@@ -4,7 +4,9 @@ package simpletest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import simpletest.pages.GoogleMainPage;
 
 
 public class SimpleTest {
@@ -12,11 +14,15 @@ public class SimpleTest {
 
     private WebDriver driver;
 
+    @BeforeClass
+    public void initDriver() {
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver");
+
+    }
+
     @Test
     public void TestOpenGoogle() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver");
-        WebDriver driver = new ChromeDriver();
-
+        driver = new ChromeDriver();
         GoogleMainPage openPage =
                 new GoogleMainPage(driver)
                         .openGoogleMain()
@@ -26,17 +32,17 @@ public class SimpleTest {
 
     @Test
     public void TestOpenYahoo() {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/drivers/chromedriver");
         driver = new ChromeDriver();
 
         GoogleMainPage openPage =
                 new GoogleMainPage(driver)
                         .openGoogleMain()
                         .checkIfYahoo();
+        driver.quit();
     }
 
     @AfterClass
-    public void closeDriver(){
+    public void closeDriver() {
         driver.quit();
     }
 }

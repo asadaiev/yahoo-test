@@ -1,4 +1,4 @@
-package simpletest;
+package simpletest.pages;
 
 import org.openqa.selenium.WebDriver;
 
